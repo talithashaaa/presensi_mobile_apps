@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "883399336230",
+    "firebase_url": "https://sikawan-001-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "sikawan-001",
+    "storage_bucket": "sikawan-001.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:883399336230:android:d7f6084f8e0da60d6aa1e7",
+        "android_client_info": {
+          "package_name": "com.atnava.ts.app.sikawan"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBah9qO6dNSjkRLhu9Mw3IeUdQx_nzsTwg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
