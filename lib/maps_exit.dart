@@ -200,50 +200,58 @@ class _MapsPageExitState extends State<MapsPageExit> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              FloatingActionButton(
-                onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => RealtimeClock()),
-                  );
-                },
-                child: Icon(Icons.arrow_back),
+              Padding(
+                padding: const EdgeInsets.only(
+                    top: 50.0, left: 30), // Atur ruang di atas tombol
+                child: FloatingActionButton(
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => RealtimeClock()),
+                    );
+                  },
+                  child: Icon(Icons.arrow_back),
+                ),
               ),
-              FloatingActionButton(
-                onPressed: () async {
-                  Position position = await _determinePosition();
-                  googleMapController.animateCamera(
-                    CameraUpdate.newCameraPosition(
-                      CameraPosition(
-                        target: LatLng(position.latitude, position.longitude),
-                        zoom: 18,
+              Padding(
+                padding: const EdgeInsets.only(
+                    top: 50.0, right: 30), // Atur ruang di atas tombol
+                child: FloatingActionButton(
+                  onPressed: () async {
+                    Position position = await _determinePosition();
+                    googleMapController.animateCamera(
+                      CameraUpdate.newCameraPosition(
+                        CameraPosition(
+                          target: LatLng(position.latitude, position.longitude),
+                          zoom: 18,
+                        ),
                       ),
-                    ),
-                  );
+                    );
 
-                  // Retrieve address
-                  List<Placemark> placemarks = await placemarkFromCoordinates(
-                    position.latitude,
-                    position.longitude,
-                  );
+                    // Retrieve address
+                    List<Placemark> placemarks = await placemarkFromCoordinates(
+                      position.latitude,
+                      position.longitude,
+                    );
 
-                  String address = _buildCompleteAddress(placemarks);
+                    String address = _buildCompleteAddress(placemarks);
 
-                  markers.clear();
-                  markers.add(
-                    Marker(
-                      markerId: MarkerId('currentLocation'),
-                      position: LatLng(position.latitude, position.longitude),
-                      icon: BitmapDescriptor.defaultMarker,
-                    ),
-                  );
+                    markers.clear();
+                    markers.add(
+                      Marker(
+                        markerId: MarkerId('currentLocation'),
+                        position: LatLng(position.latitude, position.longitude),
+                        icon: BitmapDescriptor.defaultMarker,
+                      ),
+                    );
 
-                  // Update state to display the address
-                  setState(() {
-                    _address = address;
-                  });
-                },
-                child: Icon(Icons.location_history),
+                    // Update state to display the address
+                    setState(() {
+                      _address = address;
+                    });
+                  },
+                  child: Icon(Icons.location_history),
+                ),
               ),
             ],
           ),

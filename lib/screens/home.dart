@@ -60,16 +60,17 @@ class _RealtimeClockState extends State<RealtimeClock> {
   void initState() {
     super.initState();
     Timer.periodic(const Duration(seconds: 1), (timer) {
-      setState(() {
-        realtimeClock = parseTime(
-          rawDateTime: DateTime.now(),
-        );
-        realtimeDate = parseDate(
-          rawDateTime: DateTime.now(),
-        );
-      });
+      if (mounted) {
+        setState(() {
+          realtimeClock = parseTime(
+            rawDateTime: DateTime.now(),
+          );
+          realtimeDate = parseDate(
+            rawDateTime: DateTime.now(),
+          );
+        });
+      }
     });
-
     // Move the checkLoginStatus call here
     WidgetsBinding.instance?.addPostFrameCallback((_) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -104,7 +105,7 @@ class _RealtimeClockState extends State<RealtimeClock> {
       await historyController.fetchHistory(showLoadingIndicator: true);
 
       // Sort historyList based on date in descending order
-      if (historyController.historyList.isNotEmpty) {
+      if (mounted && historyController.historyList.isNotEmpty) {
         historyController.historyList.forEach((history) {
           history.historyList.sort((a, b) => DateFormat('dd MMMM yyyy')
               .parse(b.dayDate.split(', ')[1])
